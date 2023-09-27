@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+        <h1>bientot ici hotel </h1>
+
+        {% for chose in choses %}
+            <p>{{ chose.name }}</p>
+        {% endfor %}
+
+        <p></p>
+
+
+{% endblock %}
