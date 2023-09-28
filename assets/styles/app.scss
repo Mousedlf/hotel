@@ -1,3 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@300;400;700&display=swap');
+
 body {
-    background-color: blue;
+    background-image: url("https://images.pexels.com/photos/991012/pexels-photo-991012.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+}
+
+h1{
+    font-weight: 700;
+    font-size: 4rem;
+}
+
+.test{
+    text-align: center;
+    padding-top: 30vh;
+
 }
