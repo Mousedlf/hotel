@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RoomController!{% endblock %}
+
+{% block body %}
+
+    <h1>nouvelle chambre</h1>
+
+    {{ form_start(formRoom) }}
+    {{ form_row(formRoom.name) }}
+    {{ form_row(formRoom.description) }}
+
+
+<p>*ajout d'images fait plus tard</p>
+    <button type="submit" class="">save</button>
+
+    {{ form_end(formRoom) }}
+
+
+
+
+{% endblock %}

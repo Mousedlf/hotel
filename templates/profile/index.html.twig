@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body %}
+
+    <h1>your profile</h1>
+
+   <ul>
+       <li>
+           <p>Email:{{ app.user.email }} </p>
+       </li>
+       <li>
+           {% if profile.name is not null %}
+               <p>Name: {{ profile.name }}</p>
+           {% else %}
+               <p>Name:</p>
+           {% endif %}
+       </li>
+       <li>
+           {% if profile.surname is not null %}
+               <p>Surname: {{ profile.surname }}</p>
+           {% else %}
+               <p>Surname:</p>
+           {% endif %}
+       </li>
+   </ul>
+    <a href="{{ path('edit_profile') }}" class="btn btn-warning">edit profile</a>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RoomController!{% endblock %}
+
+{% block body %}
+
+    <h1>liste des chambres</h1>
+
+    {% for room in rooms %}
+        <div class="card m-2 p-2">
+            <p>{{ room.name }}</p>
+            <p>{{ room.description }}</p>
+
+            <a href="{{ path('edit_room', {id:room.id}) }}">edit</a>
+            <a href="{{ path('delete_room', {id:room.id}) }}">delete</a>
+            <a href="{{ path('show_room', {id:room.id}) }}">more</a>
+            <a href="{{ path('app_image', {id:room.id}) }}">manage image</a>
+
+        </div>
+    {% endfor %}
+
+{% endblock %}
