@@ -4,5 +4,30 @@
 
 {% block body %}
 
-    <h1>images</h1>
+    <h1>images of room: {{ room.name }}</h1>
+
+
+<div class="row">
+    {% for image in room.images %}
+        <div class="card col-4">
+            <img src="{{ vich_uploader_asset(image, 'imageFile')}}"  alt="">
+            <a href="{{ path('remove_image', {id:image.id}) }}">remove</a>
+        </div>
+    {% endfor %}
+
+</div>
+
+
+
+    <div class="mt-5">
+        {{ form_start(formImage, {'action': path('add_image', {id:room.id}), 'method': 'POST'}) }}
+        <div class="d-flex mt-3">
+            {{ form_widget(formImage.imageFile)}}
+            <button type="submit" class="btn btn-success">save</button>
+        </div>
+        {{ form_end(formImage) }}
+    </div>
+
+
+
 {% endblock %}

@@ -27,10 +27,36 @@ class ImageController extends AbstractController
         ]);
     }
 
-    #[Route('/manage/{id}', name: 'manage_image')]
+    #[Route('/add/{id}', name: 'add_image')]
     public function manageImages(Room $room, EntityManagerInterface $manager, Request $request): Response
     {
+        $image = new Image();
+        $formImage= $this->createForm(ImageType::class, $image);
+        $formImage->handleRequest($request);
+        if($formImage->isSubmitted() && $formImage->isValid()){
 
+            $image->setOfRoom($room);
+            $manager->persist($image);
+            $manager->flush();
+        }
 
+        return $this->redirectToRoute('app_image', [
+            'id' => $room->getId()
+        ]);
+    }
+
+    #[Route('/remove/{id}', name: 'remove_image')]
+    public function delete(EntityManagerInterface $manager, Image $image): Response
+    {
+        if($image){
+            $manager->remove($image);
+            $manager->flush();
+
+            $room = $image->getOfRoom();
+        }
+
+        return $this->redirectToRoute('app_image', [
+           'id' => $room->getId()
+        ]);
     }
 }

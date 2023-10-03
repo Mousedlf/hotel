@@ -25,9 +25,13 @@ class Room
     #[ORM\OneToMany(mappedBy: 'ofRoom', targetEntity: Image::class)]
     private Collection $images;
 
+    #[ORM\ManyToMany(targetEntity: Equipment::class, mappedBy: 'ofRoom')]
+    private Collection $equipment;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->equipment = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -84,6 +88,33 @@ class Room
             if ($image->getOfRoom() === $this) {
                 $image->setOfRoom(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Equipment>
+     */
+    public function getEquipment(): Collection
+    {
+        return $this->equipment;
+    }
+
+    public function addEquipment(Equipment $equipment): static
+    {
+        if (!$this->equipment->contains($equipment)) {
+            $this->equipment->add($equipment);
+            $equipment->addOfRoom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipment(Equipment $equipment): static
+    {
+        if ($this->equipment->removeElement($equipment)) {
+            $equipment->removeOfRoom($this);
         }
 
         return $this;

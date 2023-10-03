@@ -7,15 +7,34 @@
     <h1>liste des chambres</h1>
 
     {% for room in rooms %}
-        <div class="card m-2 p-2">
-            <p>{{ room.name }}</p>
-            <p>{{ room.description }}</p>
+        <div class="card mb-3" >
+            <div class="row g-0">
 
-            <a href="{{ path('edit_room', {id:room.id}) }}">edit</a>
-            <a href="{{ path('delete_room', {id:room.id}) }}">delete</a>
-            <a href="{{ path('show_room', {id:room.id}) }}">more</a>
-            <a href="{{ path('app_image', {id:room.id}) }}">manage image</a>
+ {#               {% if room.images.0 is not null %}
+                    <div class="col-md-4">
+                    <img src="{{ vich_uploader_asset(room.images, 'imageFile')}}" class="img-fluid rounded-start" alt="...">
+                </div>
+                {% endif %}
+#}
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ room.name }}</h5>
+                        <p class="card-text">{{ room.description }}</p>
 
+                        <ul>
+                            {% for equipment in room.equipment %}
+                                <li>{{ equipment.name }}</li>
+                            {% endfor %}
+                        </ul>
+
+
+                        <a href="{{ path('edit_room', {id:room.id}) }}">edit</a>
+                        <a href="{{ path('delete_room', {id:room.id}) }}">delete</a>
+                        <a href="{{ path('show_room', {id:room.id}) }}">more</a>
+                        <a href="{{ path('app_image', {id:room.id}) }}">manage image</a>
+                    </div>
+                </div>
+            </div>
         </div>
     {% endfor %}
 
