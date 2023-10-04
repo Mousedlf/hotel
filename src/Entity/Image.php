@@ -32,6 +32,9 @@ class Image
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'images')]
+    private ?Establishment $establishment = null;
+
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
      * of 'UploadedFile' is injected into this setter to trigger the update. If this
@@ -90,6 +93,18 @@ class Image
     public function setOfRoom(?Room $ofRoom): static
     {
         $this->ofRoom = $ofRoom;
+
+        return $this;
+    }
+
+    public function getEstablishment(): ?Establishment
+    {
+        return $this->establishment;
+    }
+
+    public function setEstablishment(?Establishment $establishment): static
+    {
+        $this->establishment = $establishment;
 
         return $this;
     }

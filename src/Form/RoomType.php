@@ -17,10 +17,15 @@ class RoomType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
+            ->add('price' , null, [
+                'label' => 'Cost per night'
+            ])
+
             ->add('equipment', EntityType::class,[
                 'class'=>Equipment::class,
                 'choice_label'=> 'name',
                 'multiple' => true,
+                'label' => 'Available equipment'
             ]);
     }
 

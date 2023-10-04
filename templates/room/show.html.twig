@@ -6,5 +6,12 @@
 
     <h1>chambre {{ room.name }}</h1>
 
+    {% for image in room.images %}
+        <div class="card col-4">
+            <img src="{{ vich_uploader_asset(image, 'imageFile')}}"  alt="">
+        </div>
+    {% endfor %}
+
+
 
 {% endblock %}

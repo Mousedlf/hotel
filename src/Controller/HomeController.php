@@ -10,12 +10,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/{_locale}', name: 'app_home')]
-    public function index(ChoseRepository $choseRepository): Response
+    public function index(): Response
     {
-        $choses = $choseRepository->findAll();
-
         return $this->render('home/index.html.twig', [
-            'choses' => $choses,
         ]);
     }
 }

@@ -22,11 +22,14 @@ class Room
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\OneToMany(mappedBy: 'ofRoom', targetEntity: Image::class)]
+    #[ORM\OneToMany(mappedBy: 'ofRoom', targetEntity: Image::class, cascade: ['remove'])]
     private Collection $images;
 
     #[ORM\ManyToMany(targetEntity: Equipment::class, mappedBy: 'ofRoom')]
     private Collection $equipment;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $price = null;
 
     public function __construct()
     {
@@ -116,6 +119,18 @@ class Room
         if ($this->equipment->removeElement($equipment)) {
             $equipment->removeOfRoom($this);
         }
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(?int $price): static
+    {
+        $this->price = $price;
 
         return $this;
     }

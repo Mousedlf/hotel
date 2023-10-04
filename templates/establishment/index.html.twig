@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EstablishmentController!{% endblock %}
+
+{% block body %}
+
+    <a class="btn btn-secondary" href="{{ path('new_establishment') }}">add a hotel (dans mon cas niet)</a>
+
+
+    {% for establishment in establishments %}
+
+<div class="d-flex">
+    <h1>{{ establishment.name }}</h1>
+    <div class="d-flex align-items-center">
+        <a class="badge rounded-pill text-bg-warning text-decoration-none px-5" href="{{ path('edit_establishment', {id:establishment.id}) }}">edit</a>
+        <a class="badge rounded-pill text-bg-danger text-decoration-none px-5" href="{{ path('delete_establishment', {id:establishment.id}) }}">remove</a>
+
+    </div>
+
+</div>
+
+
+        <p>{{ establishment.description }}</p>
+
+    {% endfor %}
+
+
+
+
+{% endblock %}

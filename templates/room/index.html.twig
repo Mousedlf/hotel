@@ -4,18 +4,20 @@
 
 {% block body %}
 
-    <h1>liste des chambres</h1>
+    <h1>{{ "room"|trans }}</h1>
 
     {% for room in rooms %}
         <div class="card mb-3" >
             <div class="row g-0">
 
- {#               {% if room.images.0 is not null %}
+                {% if room.images|length > 0 %}
+
                     <div class="col-md-4">
-                    <img src="{{ vich_uploader_asset(room.images, 'imageFile')}}" class="img-fluid rounded-start" alt="...">
-                </div>
+                        <img src="{{ vich_uploader_asset(room.images.0, 'imageFile')}}" class="img-fluid rounded-start" alt="...">
+                    </div>
+
                 {% endif %}
-#}
+
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">{{ room.name }}</h5>
@@ -27,13 +29,15 @@
                             {% endfor %}
                         </ul>
 
+                        <a class="btn btn-warning" href="{{ path('edit_room', {id:room.id}) }}">edit</a>
+                        <a class="btn btn-warning" href="{{ path('app_image', {id:room.id}) }}">manage image</a>
 
-                        <a href="{{ path('edit_room', {id:room.id}) }}">edit</a>
-                        <a href="{{ path('delete_room', {id:room.id}) }}">delete</a>
-                        <a href="{{ path('show_room', {id:room.id}) }}">more</a>
-                        <a href="{{ path('app_image', {id:room.id}) }}">manage image</a>
+                        {{ include('/room/_delete_form.html.twig') }}
+
+                        <a class="btn btn-primary" href="{{ path('show_room', {id:room.id}) }}">more</a>
                     </div>
                 </div>
+
             </div>
         </div>
     {% endfor %}
