@@ -48,12 +48,8 @@ class RoomController extends AbstractController
     public function add(EntityManagerInterface $manager, Request $request, Room $room = null): Response
     {
         $edit = false;
-        if ($room) {
-            $edit = true;
-        }
-        if (!$edit) {
-            $room = new Room();
-        }
+        if ($room) {$edit = true;}
+        if (!$edit) {$room = new Room();}
 
         $formRoom = $this->createForm(RoomType::class, $room);
         $formRoom->handleRequest($request);

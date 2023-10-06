@@ -19,12 +19,15 @@ class Equipment
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $name = null;
 
-    #[ORM\ManyToMany(targetEntity: Room::class, inversedBy: 'equipment')]
-    private Collection $ofRoom;
+    #[ORM\ManyToMany(targetEntity: Room::class, mappedBy: 'equipment')]
+    private Collection $rooms;
+
+
 
     public function __construct()
     {
         $this->ofRoom = new ArrayCollection();
+        $this->rooms = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -47,24 +50,29 @@ class Equipment
     /**
      * @return Collection<int, Room>
      */
-    public function getOfRoom(): Collection
+    public function getRooms(): Collection
     {
-        return $this->ofRoom;
+        return $this->rooms;
     }
 
-    public function addOfRoom(Room $ofRoom): static
+    public function addRoom(Room $room): static
     {
-        if (!$this->ofRoom->contains($ofRoom)) {
-            $this->ofRoom->add($ofRoom);
+        if (!$this->rooms->contains($room)) {
+            $this->rooms->add($room);
+            $room->addEquipment($this);
         }
 
         return $this;
     }
 
-    public function removeOfRoom(Room $ofRoom): static
+    public function removeRoom(Room $room): static
     {
-        $this->ofRoom->removeElement($ofRoom);
+        if ($this->rooms->removeElement($room)) {
+            $room->removeEquipment($this);
+        }
 
         return $this;
     }
+
+
 }

@@ -22,7 +22,7 @@
     <div class="mt-5">
         {{ form_start(formImage, {'action': path('add_image', {id:room.id}), 'method': 'POST'}) }}
         <div class="d-flex mt-3">
-            {{ form_widget(formImage.imageFile)}}
+            {{ form_widget(formImage)}}
             <button type="submit" class="btn btn-success">save</button>
         </div>
         {{ form_end(formImage) }}

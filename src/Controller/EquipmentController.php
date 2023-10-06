@@ -28,7 +28,6 @@ class EquipmentController extends AbstractController
         $equipment = new Equipment();
         $form = $this->createForm(EquipmentType::class, $equipment);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($equipment);
             $entityManager->flush();

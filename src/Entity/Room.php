@@ -25,11 +25,14 @@ class Room
     #[ORM\OneToMany(mappedBy: 'ofRoom', targetEntity: Image::class, cascade: ['remove'])]
     private Collection $images;
 
-    #[ORM\ManyToMany(targetEntity: Equipment::class, mappedBy: 'ofRoom')]
-    private Collection $equipment;
 
     #[ORM\Column(nullable: true)]
     private ?int $price = null;
+
+    #[ORM\ManyToMany(targetEntity: Equipment::class, inversedBy: 'rooms')]
+    private Collection $equipment;
+
+
 
     public function __construct()
     {
@@ -96,6 +99,20 @@ class Room
         return $this;
     }
 
+  
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(?int $price): static
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Equipment>
      */
@@ -108,7 +125,6 @@ class Room
     {
         if (!$this->equipment->contains($equipment)) {
             $this->equipment->add($equipment);
-            $equipment->addOfRoom($this);
         }
 
         return $this;
@@ -116,21 +132,7 @@ class Room
 
     public function removeEquipment(Equipment $equipment): static
     {
-        if ($this->equipment->removeElement($equipment)) {
-            $equipment->removeOfRoom($this);
-        }
-
-        return $this;
-    }
-
-    public function getPrice(): ?int
-    {
-        return $this->price;
-    }
-
-    public function setPrice(?int $price): static
-    {
-        $this->price = $price;
+        $this->equipment->removeElement($equipment);
 
         return $this;
     }
