@@ -32,7 +32,7 @@
                         <a class="btn btn-warning" href="{{ path('edit_room', {id:room.id}) }}">edit</a>
                         <a class="btn btn-warning" href="{{ path('app_image', {id:room.id}) }}">manage image</a>
 
-                        <a class="btn btn-success" href="{{ path('reservation_search_parameters', {id:room.id}) }}">BOOK this room</a>
+                        <a class="btn btn-success" href="{{ path('reservation_choices', {id:room.id}) }}">BOOK this room</a>
 
 
                         {{ include('/room/_delete_form.html.twig') }}

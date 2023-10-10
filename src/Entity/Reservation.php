@@ -30,6 +30,13 @@ class Reservation
     #[ORM\Column(nullable: true)]
     private ?int $cost = null;
 
+    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    private ?Guest $guest = null;
+
+    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Room $room = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +111,18 @@ class Reservation
     public function setCost(?int $cost): static
     {
         $this->cost = $cost;
+
+        return $this;
+    }
+
+    public function getGuest(): ?Guest
+    {
+        return $this->guest;
+    }
+
+    public function setGuest(?Guest $guest): static
+    {
+        $this->guest = $guest;
 
         return $this;
     }

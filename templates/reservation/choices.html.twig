@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ReservationController!{% endblock %}
+
+{% block body %}
+
+
+    <div class="card p-2 my-4">
+        <p>Room: {{ room.name }}</p>
+        <p>Description: {{ room.description }}</p>
+        <p>cost per night: {{ room.price }}</p>
+
+
+    </div>
+
+    {#    Message flash#}
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice alert alert-warning alert-dismissible fade show" role="alert">
+            <p class="mb-0">{{ message }}</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+
+    {{ form_start(formReservation) }}
+
+
+    {{ form_row(formReservation.checkIn) }}
+    {{ form_row(formReservation.checkOut) }}
+    {{ form_row(formReservation.numberOfPeople) }}
+
+    <button type="submit" class="btn btn-primary">check if ok </button>
+
+    {{ form_end(formReservation) }}
+
+    // pas de reservation au chargement page donc pb
+        <a href="{{ path('reservation_guest_info', {id:reservation.id}) }}">next step: guest information</a>
+
+
+{% endblock %}
