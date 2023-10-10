@@ -25,7 +25,6 @@ class Room
     #[ORM\OneToMany(mappedBy: 'ofRoom', targetEntity: Image::class, cascade: ['remove'])]
     private Collection $images;
 
-
     #[ORM\Column(nullable: true)]
     private ?int $price = null;
 
@@ -133,6 +132,28 @@ class Room
     public function removeEquipment(Equipment $equipment): static
     {
         $this->equipment->removeElement($equipment);
+
+        return $this;
+    }
+
+    public function getReservation(): ?Reservation
+    {
+        return $this->reservation;
+    }
+
+    public function setReservation(?Reservation $reservation): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($reservation === null && $this->reservation !== null) {
+            $this->reservation->setRoom(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($reservation !== null && $reservation->getRoom() !== $this) {
+            $reservation->setRoom($this);
+        }
+
+        $this->reservation = $reservation;
 
         return $this;
     }
