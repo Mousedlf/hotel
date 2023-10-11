@@ -33,8 +33,9 @@
 
     {{ form_end(formReservation) }}
 
-    // pas de reservation au chargement page donc pb
-        <a href="{{ path('reservation_guest_info', {id:reservation.id}) }}">next step: guest information</a>
 
+    {% if reservation.id is not null %}
+        <a href="{{ path('reservation_guest_info', {id:reservation.id}) }}">next step: guest information</a>
+    {% endif %}
 
 {% endblock %}

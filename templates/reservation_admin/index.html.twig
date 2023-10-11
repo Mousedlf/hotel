@@ -15,7 +15,10 @@
                 <th>NumberOfPeople</th>
                 <th>Cost</th>
                 <th>Guest</th>
+                <th>Room id</th>
+{#
                 <th>Actions</th>
+#}
 
             </tr>
         </thead>
@@ -29,9 +32,12 @@
                 <td>{{ reservation.numberOfPeople }}</td>
                 <td>{{ reservation.cost }}</td>
                 <td>{{ reservation.guest.name }}</td>
+                <td> {{ reservation.room.id }}
+                </td>
                 <td>
+{#
                     <a href="{{ path('app_reservation_admin_show', {'id': reservation.id}) }}">show</a>
-                    <a href="{{ path('app_reservation_admin_edit', {'id': reservation.id}) }}">edit</a>
+#}
                 </td>
             </tr>
         {% else %}
@@ -42,5 +48,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_reservation_admin_new') }}">Create new</a>
+{#    <a href="{{ path('app_reservation_admin_new') }}">Create new</a>#}
 {% endblock %}

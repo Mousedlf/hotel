@@ -28,6 +28,7 @@ class ReservationController extends AbstractController
             $reservation->setRoom($room);
             $reservation->setCreatedAt(new \DateTimeImmutable());
 
+            //ajouter verif disponibilité de la chambre !
 
             $checkIn= $reservation->getCheckIn();
             $checkOut=$reservation->getCheckOut();
@@ -48,6 +49,8 @@ class ReservationController extends AbstractController
             );
 
         }
+
+        // dd($reservation);
 
         return $this->render('reservation/choices.html.twig', [
             'formReservation' => $formReservation,
