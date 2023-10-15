@@ -29,13 +29,18 @@ class ReservationController extends AbstractController
             $reservation->setCreatedAt(new \DateTimeImmutable());
 
             //ajouter verif disponibilité de la chambre !
+            // check dans room.reservations
+            // si jour deja dans autre reservation alors niet
+
+
+            $nbPeople = $reservation->getNumberOfPeople();
 
             $checkIn= $reservation->getCheckIn();
             $checkOut=$reservation->getCheckOut();
             $totalNights = $checkIn->diff($checkOut)->days;
 
             $costPerNight= $room->getPrice();
-            $totalCost= $totalNights*$costPerNight;
+            $totalCost= $totalNights*$costPerNight*$nbPeople;
             $reservation->setCost($totalCost);
 
 

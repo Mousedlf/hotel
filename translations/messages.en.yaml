@@ -1,3 +1,21 @@
-test: "that looks like english"
-tagline: "webpage for a hotel"
-room: "All the rooms"
+#ENGLISH
+
+navbar:
+  rooms: "Our rooms"
+  signup: "Register"
+  signin: "Sign in"
+  logout: "Logout"
+  admin:
+    overview: "overview"
+    rooms: "rooms"
+    establishment: "establishment"
+    reservations: "reservations"
+    equipment: "equipment"
+h1:
+  rooms: "Our rooms"
+btn:
+  edit: "edit"
+  delete: "delete"
+  book: "Book this room"
+book:
+  night: "night"

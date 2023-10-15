@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation index{% endblock %}
+
+{% block body %}
+
+    <div class="mb-5">
+        <h1>Room index</h1>
+        <a href="{{ path('new_room') }}" class="btn btn-warning">new room</a>
+
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+{#                <th>Id</th>#}
+                <th>Name</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Equipment</th>
+                <th>Reservations</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for room in rooms %}
+            <tr>
+{#                <td>{{ room.id }}</td>#}
+                <td>{{ room.name }}</td>
+                <td>{{ room.price }}</td>
+                <td>{{ room.description|slice(0, 300) ~ '...' }}</td>
+                <td>
+                {% for equipment in room.equipment %}
+                        <p class="badge text-bg-secondary m-0">{{ equipment.name }}</p>
+                {% endfor %}
+                </td>
+                <td class="">
+                    <p>yes/no</p>
+                    <a href="" class="btn btn-primary">See more</a>
+                </td>
+                <td>
+                    <a href="{{ path('edit_room', {id:room.id}) }}" class="btn btn-warning">edit</a>
+                    <a href="{{ path('app_image', {id:room.id}) }}" class="badge text-bg-warning">manage images</a>
+                    <a href="{{ path('delete_room', {id:room.id}) }}" class="badge text-bg-danger">delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{#    <a href="{{ path('app_room_admin_new') }}">Create new</a>#}
+{% endblock %}

@@ -24,6 +24,16 @@ class RoomController extends AbstractController
         ]);
     }
 
+    #[Route('/admin/', name: 'app_room_admin')]
+    public function indexAdmin(RoomRepository $roomRepository): Response
+    {
+        $rooms = $roomRepository->findAll();
+
+        return $this->render('room/indexAdmin.html.twig', [
+            'rooms' => $rooms,
+        ]);
+    }
+
     #[Route('/{id}', name: 'show_room')]
     public function show(Room $room): Response
     {
@@ -32,7 +42,7 @@ class RoomController extends AbstractController
         ]);
     }
 
-    #[Route('/remove/{id}', name: 'delete_room')]
+    #[Route('/admin/remove/{id}', name: 'delete_room')]
     public function delete(Room $room, EntityManagerInterface $manager): Response
     {
         if ($room) {
@@ -40,13 +50,14 @@ class RoomController extends AbstractController
             $manager->flush();
         }
 
-        return $this->redirectToRoute('app_room');
+        return $this->redirectToRoute('app_room_admin');
     }
 
-    #[Route('/edit/{id}', name: 'edit_room', priority: 2)]
-    #[Route('/new', name: 'new_room', priority: 2)]
+    #[Route('/admin/edit/{id}', name: 'edit_room', priority: 2)]
+    #[Route('/admin/new', name: 'new_room', priority: 2)]
     public function add(EntityManagerInterface $manager, Request $request, Room $room = null): Response
     {
+
         $edit = false;
         if ($room) {$edit = true;}
         if (!$edit) {$room = new Room();}
@@ -58,7 +69,7 @@ class RoomController extends AbstractController
             $manager->persist($room);
             $manager->flush();
 
-            return $this->redirectToRoute('app_room');
+            return $this->redirectToRoute('app_room_admin');
         }
 
         return $this->render('room/new.html.twig', [

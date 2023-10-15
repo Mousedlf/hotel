@@ -4,13 +4,40 @@
 
 {% block body %}
 
-    <h1>chambre {{ room.name }}</h1>
+    {% if is_granted('ROLE_ADMIN') %}
+    <div class="d-flex">
+        <a class="btn btn-warning" href="{{ path('edit_room', {id:room.id}) }}">edit</a>
+        <a class="btn btn-warning" href="{{ path('app_image', {id:room.id}) }}">manage image</a>
+        {{ include('/room/_delete_form.html.twig') }}
+    </div>
+    {% endif %}
 
-    {% for image in room.images %}
-        <div class="card col-4">
-            <img src="{{ vich_uploader_asset(image, 'imageFile')}}"  alt="">
+    <div class="mt-5">
+        <div class="d-flex justify-content-between">
+            <h1>{{ room.name }}</h1>
+            <div class="d-flex">
+                <p class="me-3"><span class="fw-bold fs-2">{{room.price }}€</span>/{{ "book.night"|trans }}</p>
+                <span><a class="btn btn-primary" href="{{ path('reservation_choices', {id:room.id}) }}">{{ "btn.book"|trans }}</a></span>
+            </div>
         </div>
+        <p class="col-10">{{ room.description }}</p>
+    </div>
+
+
+
+
+    {% for equipment in room.equipment %}
+        <p class="badge text-bg-secondary fs-6">{{ equipment.name }}</p>
     {% endfor %}
+
+    <div class="row mt-5">
+        {% for image in room.images %}
+            <div class="card col-4">
+                <img src="{{ vich_uploader_asset(image, 'imageFile')}}"  alt="">
+            </div>
+        {% endfor %}
+    </div>
+
 
 
 

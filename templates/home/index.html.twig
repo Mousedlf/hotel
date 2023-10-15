@@ -6,8 +6,12 @@
 
     <div class="test">
 
-        <h1>{{ 'tagline'|trans }}</h1>
+        {% for establishment in establishments %}
 
+        <h1>{{ establishment.name }}</h1>
+            <p>{{ establishment.description }}</p>
+
+        {% endfor %}
     </div>
 
 

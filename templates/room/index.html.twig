@@ -4,45 +4,31 @@
 
 {% block body %}
 
-    <h1>{{ "room"|trans }}</h1>
+    <h1>{{ "h1.rooms"|trans }}</h1>
 
-    {% for room in rooms %}
-        <div class="card mb-3" >
-            <div class="row g-0">
+    <div class="row">
+        {% for room in rooms %}
+            <div class="card mb-3 cont col-4" >
+                <a class="text-decoration-none" href="{{ path('show_room', {id:room.id}) }}">
 
                 {% if room.images|length > 0 %}
 
-                    <div class="col-md-4">
-                        <img src="{{ vich_uploader_asset(room.images.0, 'imageFile')}}" class="img-fluid rounded-start" alt="...">
-                    </div>
+                    <img src="{{ vich_uploader_asset(room.images.0, 'imageFile')}}" class="img-fluid rounded-start" alt="...">
 
                 {% endif %}
 
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ room.name }}</h5>
-                        <p class="card-text">{{ room.description }}</p>
+                <div class="col-md-8 overlay">
+                    <div class="text text-center">
+                        <h3 class="text-white text-uppercase">{{ room.name }}</h3>
+                        <p class="text-white">{{ room.price }}€/night</p>
+                        <a class="btn btn-primary" href="{{ path('reservation_choices', {id:room.id}) }}">{{ "btn.book"|trans }}</a>
 
-                        <ul>
-                            {% for equipment in room.equipment %}
-                                <li>{{ equipment.name }}</li>
-                            {% endfor %}
-                        </ul>
-
-                        <a class="btn btn-warning" href="{{ path('edit_room', {id:room.id}) }}">edit</a>
-                        <a class="btn btn-warning" href="{{ path('app_image', {id:room.id}) }}">manage image</a>
-
-                        <a class="btn btn-success" href="{{ path('reservation_choices', {id:room.id}) }}">BOOK this room</a>
-
-
-                        {{ include('/room/_delete_form.html.twig') }}
-
-                        <a class="btn btn-primary" href="{{ path('show_room', {id:room.id}) }}">more</a>
                     </div>
                 </div>
-
+                </a>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
+
 
 {% endblock %}

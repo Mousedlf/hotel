@@ -1,3 +1,21 @@
-test: "du français"
-tagline: "site pour un hotel"
-room: "Toutes les chambres"
+#FRANCAIS
+
+navbar:
+  rooms: "Nos chambres"
+  signup: "S'inscrire"
+  signin: "Connexion"
+  logout: "Déconnexion"
+  admin:
+    overview: "vue d'ensemble"
+    rooms: "chambres"
+    establishment: "établissement"
+    reservations: "réservations"
+    equipment: "equipement"
+h1:
+  rooms: "Nos chambres"
+btn:
+  edit: "editer"
+  delete: "supprimer"
+  book: "Réserver la chambre"
+book:
+  night: "nuit"
