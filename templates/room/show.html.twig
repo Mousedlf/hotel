@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello RoomController!{% endblock %}
+{% block title %}Starry Night Hotel |{{ room.name }} room{% endblock %}
 
 {% block body %}
 
@@ -12,6 +12,7 @@
     </div>
     {% endif %}
 
+<div class="container">
     <div class="mt-5">
         <div class="d-flex justify-content-between">
             <h1>{{ room.name }}</h1>
@@ -25,17 +26,23 @@
 
 
 
-
+<div class="my-5">
     {% for equipment in room.equipment %}
         <p class="badge text-bg-secondary fs-6">{{ equipment.name }}</p>
     {% endfor %}
+</div>
+
+</div>
+
 
     <div class="row mt-5">
         {% for image in room.images %}
-            <div class="card col-4">
+            <div class="card border-0 col-4 p-1">
                 <img src="{{ vich_uploader_asset(image, 'imageFile')}}"  alt="">
             </div>
         {% endfor %}
+
+
     </div>
 
 

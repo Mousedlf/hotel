@@ -4,21 +4,25 @@
 
 {% block body %}
 
-    <h1>nouvelle chambre</h1>
+    <div class="container">
+        <h1>nouvelle chambre</h1>
 
-    {{ form_start(formRoom) }}
-    {{ form_row(formRoom.name) }}
-    {{ form_row(formRoom.description) }}
-    {{ form_row(formRoom.price) }}
-
-
-    {{ form_row(formRoom.equipment) }}
+        {{ form_start(formRoom) }}
+        {{ form_row(formRoom.name) }}
+        {{ form_row(formRoom.description) }}
+        {{ form_row(formRoom.price) }}
 
 
+        {{ form_row(formRoom.equipment) }}
 
-    <button type="submit" class="btn btn-success">save</button>
 
-    {{ form_end(formRoom) }}
+
+        <button type="submit" class="btn btn-success">save</button>
+
+        {{ form_end(formRoom) }}
+    </div>
+
+
 
 
 {% endblock %}

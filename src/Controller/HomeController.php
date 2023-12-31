@@ -10,8 +10,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/{_locale}', name: 'app_home')]
+    #[Route('/', name: '')]
     public function index(EstablishmentRepository $repository): Response
+    {
+        $establishments = $repository->findAll();
+
+        return $this->redirectToRoute('app_home');
+    }
+
+    #[Route('/{_locale}', name: 'app_home')]
+    public function indexHome(EstablishmentRepository $repository): Response
     {
         $establishments = $repository->findAll();
 

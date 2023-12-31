@@ -1,25 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello RoomController!{% endblock %}
+{% block title %}Starry Night Hotel | Our Rooms{% endblock %}
 
 {% block body %}
 
-    <h1>{{ "h1.rooms"|trans }}</h1>
+    <div class="container">
+        <h1>~ {{ "h1.rooms"|trans }} ~</h1>
+    </div>
 
-    <div class="row">
+    {#    Message flash#}
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice alert alert-warning alert-dismissible fade show" role="alert">
+            <p class="mb-0">{{ message }}</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+    <div class="row row-cols-3" >
         {% for room in rooms %}
-            <div class="card mb-3 cont col-4" >
+            <div class="card p-0 m-0 cont col">
                 <a class="text-decoration-none" href="{{ path('show_room', {id:room.id}) }}">
 
                 {% if room.images|length > 0 %}
 
-                    <img src="{{ vich_uploader_asset(room.images.0, 'imageFile')}}" class="img-fluid rounded-start" alt="...">
+                    <img src="{{ vich_uploader_asset(room.images.0, 'imageFile')}}" class="img-fluid rounded-start" alt="..." style="; object-fit: contain" >
 
                 {% endif %}
 
                 <div class="col-md-8 overlay">
                     <div class="text text-center">
-                        <h3 class="text-white text-uppercase">{{ room.name }}</h3>
+                        <h3 class="text-white text-uppercase vincent mb-5 fs-1">{{ room.name }}</h3>
                         <p class="text-white">{{ room.price }}€/night</p>
                         <a class="btn btn-primary" href="{{ path('reservation_choices', {id:room.id}) }}">{{ "btn.book"|trans }}</a>
 

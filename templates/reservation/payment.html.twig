@@ -1,21 +1,62 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ReservationController!{% endblock %}
+{% block title %}Starry Night Hotel | Reservation 3/3{% endblock %}
 
 {% block body %}
 
+<div class="container">
+
+   <div class="row">
+
+       <div class="col-9">
+           <h2>~ Choose a payment method ~</h2>
+           <div class="row text-center d-flex justify-content-center mb-5">
+               <div class="card py-4 m-2 col-3">1</div>
+               <div class="card py-4 m-2 col-3">2</div>
+               <div class="card py-4 m-2 col-3">3</div>
+
+           </div>
+
+           <div class="d-flex justify-content-between">
+               <a href="{{ path('reservation_guest_info', {id:reservation.id}) }}" class="btn btn-link">< Previous step: Guest info</a>
+               <a href="{{ path('app_room') }}" class="btn btn-link">Finish reservation</a>
+           </div>
+
+       </div>
+
+       <div class="col-3">
+
+           <div class="card p-3 my-5" >
+               <h2>Recap</h2>
+
+               <p class="fw-bold">Room: {{ room.name }}</p>
+               <p class="fw-bold">Dates: {{ reservation.checkIn|date("d/m/Y") }} - {{ reservation.checkOut|date("d/m/Y") }}</p>
+               <p class="fw-bold mb-5">Total cost: {{ reservation.cost }} €</p>
+
+               <p>Cost per night: {{ room.price }} €</p>
+               <p>Number of guests : {{ reservation.numberOfPeople }}</p>
+               <div class="d-flex">
+                   <p>Equipment:</p>
+                   <ul>
+                       {% for equipment in room.equipment %}
+                           <li class="">{{ equipment.name }}</li>
+                       {% endfor %}
+                   </ul>
+               </div>
+               <div class="d-flex">
+                   <p>Guest info:</p>
+                   <ul>
+                       <li>{{ reservation.guest.surname }} {{ reservation.guest.name }}</li>
+                       <li>{{ reservation.guest.email }}</li>
+                   </ul>
+               </div>
+           </div>
+       </div>
+
+   </div>
 
 
-        <h1>Choose a payment method : </h1>
-        <div class="row text-center">
-            <div class="card py-4 m-2 col-3">1</div>
-            <div class="card py-4 m-2 col-3">2</div>
-            <div class="card py-4 m-2 col-3">3</div>
-
-        </div>
-
-
-    <a href="{{ path('app_room') }}">Finish reservation</a>
+</div>
 
 
 {% endblock %}

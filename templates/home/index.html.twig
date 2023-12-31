@@ -1,18 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Starry Night Hotel {% endblock %}
 
 {% block body %}
 
-    <div class="test">
 
-        {% for establishment in establishments %}
+<div class="bg-gogh my-5  py-perso">
 
-        <h1>{{ establishment.name }}</h1>
-            <p>{{ establishment.description }}</p>
+    {% for establishment in establishments %}
+        <h1 class="fs-0">{{ establishment.name }}</h1>
+</div>
+<div class="container text-center">
+    <p class="fs-5">{{ establishment.description }}</p>
+    {% endfor %}
+    <a href="{{ path('app_room') }}" class="btn btn-primary mt-4">Discover our rooms</a>
+</div>
 
-        {% endfor %}
-    </div>
 
 
 {% endblock %}
